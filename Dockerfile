@@ -7,7 +7,7 @@ WORKDIR /app
 # Avoid interactive prompts during apt installs
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install system dependencies (git + ffmpeg). Use apt-get and clean caches.
+# Install system dependencies (git + ffmpeg)
 RUN apt-get update -y \
  && apt-get install -y --no-install-recommends \
     git \
@@ -18,10 +18,9 @@ RUN apt-get update -y \
 # Copy project files
 COPY . .
 
-# Install Python deps in requirements.txt (no cache)
+# Install Python dependencies
 RUN python -m pip install --upgrade pip \
  && pip install --no-cache-dir -r requirements.txt
 
-# If your bot needs a session string or other env vars, they must be passed through Render
-# Example startup command — replace "bot.py" with your main script if different.
-CMD ["python", "bot.py"]
+# ✅ IMPORTANT: Run the bot from main/__main__.py
+CMD ["python", "-m", "main"]
