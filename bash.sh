@@ -10,8 +10,8 @@
 # NEW WORKING CODE (Render compatible)
 # ===========================
 
-# Start dummy web server so Render doesn't timeout
+# Start dummy server for Render
 python3 server.py &
 
-# Start your Telegram bot
-python3 main/__main__.py
+# Start Telegram bot properly using package mode
+python3 -m main
