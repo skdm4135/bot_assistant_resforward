@@ -105,7 +105,7 @@ async def run_batch(userbot, client, sender, countdown, link):
     for i in range(len(ids)):
         timer = 6
         if i < 250:
-            timer = 2
+            timer = 4
         elif i < 1000 and i > 100:
             timer = 3
         elif i < 10000 and i > 1000:
@@ -120,7 +120,7 @@ async def run_batch(userbot, client, sender, countdown, link):
             timer = 10
         
         if 't.me/c/' not in link:
-            timer = 1 if i < 500 else 2
+            timer = 4 if i < 500 else 5
         try: 
             count_down = f"**Batch process ongoing.**\n\nProcess completed: {i+1}"
             #a =ids[i]
