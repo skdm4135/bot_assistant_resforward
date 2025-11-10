@@ -1,8 +1,27 @@
-FROM python:3.9.2-slim-buster
-RUN mkdir /app && chmod 777 /app
+# Use a modern, supported Python base (Debian bookworm slim)
+FROM python:3.11-bookworm
+
+# Set working directory
 WORKDIR /app
+
+# Avoid interactive prompts during apt installs
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt -qq update && apt -qq install -y git python3 python3-pip ffmpeg
+
+# Install system dependencies (git + ffmpeg). Use apt-get and clean caches.
+RUN apt-get update -y \
+ && apt-get install -y --no-install-recommends \
+    git \
+    ffmpeg \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+# Copy project files
 COPY . .
-RUN pip3 install --no-cache-dir -r requirements.txt
-CMD ["bash","bash.sh"]
+
+# Install Python deps in requirements.txt (no cache)
+RUN python -m pip install --upgrade pip \
+ && pip install --no-cache-dir -r requirements.txt
+
+# If your bot needs a session string or other env vars, they must be passed through Render
+# Example startup command — replace "bot.py" with your main script if different.
+CMD ["python", "bot.py"]
