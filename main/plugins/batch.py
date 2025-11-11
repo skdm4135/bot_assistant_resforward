@@ -133,11 +133,11 @@ async def run_batch(userbot, client, sender, countdown, link):
                 msg_id = int(link_.split("/")[-1])
             integer = msg_id + int(ids[i])
             await get_bulk_msg(userbot, client, sender, link, integer)
-            protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
+            # protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
             await countdown.edit(count_down, 
                                  buttons=[[Button.inline("CANCEL❌", data="cancel")]])
             await asyncio.sleep(timer)
-            await protection.delete()
+            # await protection.delete()
         except IndexError as ie:
             await client.send_message(sender, f" {i}  {ie}  \n\nBatch ended completed!")
             await countdown.delete()
