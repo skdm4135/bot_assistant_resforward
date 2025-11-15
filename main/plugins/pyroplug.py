@@ -1,4 +1,4 @@
-j#Github.com/mrinvisible7
+#Github.com/mrinvisible7
 
 import asyncio, time, os
 import logging
